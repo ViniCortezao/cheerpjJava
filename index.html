@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Java para JAR</title>
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+</head>
+<body>
+    <textarea id="codigoJava" rows="10" cols="50">public class Main { public static void main(String[] args) { System.out.println("Hello World!"); }}</textarea>
+    <button onclick="baixarJar()">Baixar JAR</button>
+	<a href="w.html">w</a>
+    <script>
+        async function baixarJar() {
+            const codigoJava = document.getElementById('codigoJava').value;
+            const response = await fetch('/converterJava', {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: codigoJava
+            });
+
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'codigo.jar';
+                link.click();
+                URL.revokeObjectURL(url);
+            } else {
+                alert('Erro ao gerar o JAR');
+            }
+        }
+    </script>
+  <input>
+  <p>a</p>
+  <button onclick="t()">test</button>
+    <script>
+	arq = "";
+      function t() {
+        arq = document.querySelector("input").value;
+        document.querySelector("p").innerHTML = arq;
+	b();
+      }
+      async function b() {
+        await cheerpjInit();
+        cheerpjCreateDisplay(800, 600);
+        await cheerpjRunJar("/app/" + arq); // Certifique-se de que o caminho inclua "/app/"
+      };
+    </script>
+</body>
+</html>
